@@ -1,0 +1,22 @@
+[
+    {
+        "Hall_number": 1,
+        "Status": "Free",
+        "Available_seats": 120
+    },
+    {
+        "Hall_number": 2,
+        "Status": "Free",
+        "Available_seats": 120
+    },
+    {
+        "Hall_number": 3,
+        "Status": "Free",
+        "Available_seats": 120
+    },
+    {
+        "Hall_number": 4,
+        "Status": "Free",
+        "Available_seats": 120
+    }
+]

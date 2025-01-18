@@ -1,4 +1,21 @@
 from cinema_data_and_structure import *
+import json
+import os
+
+def check_cinema_halls():
+	if os.path.isfile(CINEMA_HALLS_PATH) and os.access(CINEMA_HALLS_PATH, os.R_OK):
+		return True
+	else:
+		data = []
+		for hall_number in TOTAL_AVAILABLE_HALLS:
+			default_data = {
+				"Hall_number": hall_number,
+				"Status": "Free",
+				"Available_seats": SEATS_PER_HALL
+			}
+			data.append(default_data)
+		with open(CINEMA_HALLS_PATH, "a") as default_file:
+			json.dump(data, default_file, indent=4)
 
 class Movie:
 	def __init__(self, title, duration, showtimes=None):
@@ -53,7 +70,17 @@ class VIPCustomer(Customer):
 		self.private_show_access = True
 
 	def get_discounted_price(self, price):
-		pass
+		price = price * VIP_DISCOUNT
+		print(f"Greetings sir, your ticket price, including Your VIP discount, is {price}$")
+		return price
+
+	def book_private_show(self, movie, time, hall):
+		self.movie = movie
+		self.time = time
+		self.hall = hall
+
+
+check_cinema_halls()
 
 movie_library = Movie("Władca Pierścieni", "2 godziny", ["9:00-12:00"])
 movie_library.add_showtime("14:00-15:30")
