@@ -89,8 +89,8 @@ class VIPCustomer(Customer):
 	def book_private_show(self, movie, time, hall):
 		self.movie = movie
 		self.time = time
+
 		halls_data = get_halls_data()
-		print(halls_data)
 		for hall_data in halls_data:
 			if hall_data["Hall_number"] == hall:
 				hall_data["Status"] = "VIP Reserved"
