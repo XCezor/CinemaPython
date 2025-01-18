@@ -36,13 +36,13 @@ class Customer:
 		self.time.append(time)
 
 	def display_reservations(self):
-		display = {
+		reservations = {
 			"First name": self.first_name,
 			"Last name": self.last_name,
-			"Movie": self.movie,
-			"Time": self.time
+			"Movies": self.movie,
+			"Times": self.time
 		}
-		print(display)
+		print(reservations)
 
 movie_library = Movie("Władca Pierścieni", "2 godziny", ["9:00-12:00"])
 movie_library.add_showtime("14:00-15:30")
@@ -51,6 +51,7 @@ movie_library.display_details()
 
 customer = Customer("Tom", "Holland")
 customer.add_reservation("Titanic", "12:30")
+customer.add_reservation("Pulp Fiction", "14:30")
 customer.display_reservations()
 
 time_to_remove = input("Podaj czas: ")
