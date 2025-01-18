@@ -3,6 +3,7 @@ import json
 import os
 
 def check_cinema_halls():
+	'''Checks if the .json file with cinema halls data exists. If not, creates one with the correct formatting.'''
 	if os.path.isfile(CINEMA_HALLS_PATH) and os.access(CINEMA_HALLS_PATH, os.R_OK):
 		return True
 	else:
