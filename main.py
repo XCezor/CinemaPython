@@ -18,6 +18,17 @@ def check_cinema_halls():
 		with open(CINEMA_HALLS_PATH, "a") as default_file:
 			json.dump(data, default_file, indent=4)
 
+def get_halls_data():
+    check_cinema_halls()
+    with open(CINEMA_HALLS_PATH, "r") as halls_file:
+        halls_data = json.load(halls_file)
+    return halls_data
+
+def save_halls_data(halls_data):
+    check_cinema_halls()
+    with open(CINEMA_HALLS_PATH, "w") as halls_file:
+        json.dump(halls_data, halls_file, indent=4)
+
 class Movie:
 	def __init__(self, title, duration, showtimes=None):
 		self.title = title
@@ -78,20 +89,29 @@ class VIPCustomer(Customer):
 	def book_private_show(self, movie, time, hall):
 		self.movie = movie
 		self.time = time
-		self.hall = hall
+		halls_data = get_halls_data()
+		print(halls_data)
+		for hall_data in halls_data:
+			if hall_data["Hall_number"] == hall:
+				hall_data["Status"] = "VIP Reserved"
+		save_halls_data(halls_data)
 
 
 check_cinema_halls()
 
-movie_library = Movie("Władca Pierścieni", "2 godziny", ["9:00-12:00"])
-movie_library.add_showtime("14:00-15:30")
 
-movie_library.display_details()
+#movie_library = Movie("Władca Pierścieni", "2 godziny", ["9:00-12:00"])
+#movie_library.add_showtime("14:00-15:30")
+
+#movie_library.display_details()
 
 customer = Customer("Tom", "Holland")
 customer.add_reservation("Titanic", "12:30")
 customer.add_reservation("Pulp Fiction", "14:30")
 customer.display_reservations()
+
+vip = VIPCustomer("Marcus", "Person")
+vip.book_private_show("Titanic", "12:30", 2)
 
 #time_to_remove = input("Podaj czas: ")
 #movie_library.remove_showtime(time_to_remove)
