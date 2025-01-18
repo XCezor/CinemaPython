@@ -1,7 +1,7 @@
 # PythonKlasy
 
-Zadanie:  **System rezerwacji biletów do kina**  
-Celem zadania jest stworzenie systemu rezerwacji biletów do kina. Program powinien umożliwiać zarządzanie filmami, rezerwacjami oraz klientami z wykorzystaniem klas i dziedziczenia. W zadaniu należy zaimplementować co najmniej dwie klasy główne oraz klasę dziedziczącą, która rozszerza funkcjonalność jednej z głównych klas.Wymagania:  
+Zadanie:  **System rezerwacji biletów do kina**
+Celem zadania jest stworzenie systemu rezerwacji biletów do kina. Program powinien umożliwiać zarządzanie filmami, rezerwacjami oraz klientami z wykorzystaniem klas i dziedziczenia. W zadaniu należy zaimplementować co najmniej dwie klasy główne oraz klasę dziedziczącą, która rozszerza funkcjonalność jednej z głównych klas.Wymagania:
 
 1.  **Stwórz klasę** `**Movie**` **(Film):**
 
@@ -58,7 +58,7 @@ Celem zadania jest stworzenie systemu rezerwacji biletów do kina. Program powin
 -   W programie głównym (np. w funkcji  `main`) utwórz co najmniej dwa filmy, jednego zwykłego klienta i jednego klienta VIP.
 -   Zademonstruj działanie metod (np. dodawanie rezerwacji, wyświetlanie szczegółów filmu i rezerwacji).
 
-Przykład działania:  
+Przykład działania:
 
 1.  Program wyświetla dostępne filmy w repertuarze kina.
 2.  Klient rezerwuje bilet na film, wybierając tytuł i godzinę seansu.
