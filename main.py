@@ -41,15 +41,18 @@ class Movie:
 	def remove_showtime(self, time:str):
 		if time in self.showtimes:
 			self.showtimes.remove(time)
-		print("All showtimes removed successfully, if there were any.")
+		print("Showtime removed successfully, if there was any.")
 
 	def display_details(self):
-		details = {
-			"Title": self.title,
-			"Duration": self.duration,
-			"Showtimes": self.showtimes
-		}
-		print(details)
+		print(f"Title: {self.title}\nDuration: {self.duration} minutes\nShowtimes: {self.showtimes}\n")
+
+class Customer:
+	def __init__(self, first_name, last_name):
+		self.first_name = first_name
+		self.last_name = last_name
+
+	def add_reservation(self, movie, time):
+		self.movie = movie
 
 new_movie = Movie("Titanic", "150", ["12:30-12:50", "14:00-15:50"])
 new_movie.display_details()
