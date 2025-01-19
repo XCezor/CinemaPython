@@ -8,5 +8,10 @@
         "Title": "fd",
         "Duration": "532",
         "Showtimes": "2"
+    },
+    {
+        "Title": "Orka",
+        "Duration": "180",
+        "Showtimes": "12:30-15:00"
     }
 ]

@@ -2,21 +2,27 @@
     {
         "Hall_number": 1,
         "Status": "Free",
-        "Available_seats": 120
+        "Available_seats": 120,
+        "Reserved_showtimes": [
+            "12:30-15:00"
+        ]
     },
     {
         "Hall_number": 2,
-        "Status": "VIP Reserved",
-        "Available_seats": 120
+        "Status": "Free",
+        "Available_seats": 120,
+        "Reserved_showtimes": []
     },
     {
         "Hall_number": 3,
         "Status": "Free",
-        "Available_seats": 120
+        "Available_seats": 120,
+        "Reserved_showtimes": []
     },
     {
         "Hall_number": 4,
         "Status": "Free",
-        "Available_seats": 120
+        "Available_seats": 120,
+        "Reserved_showtimes": []
     }
 ]

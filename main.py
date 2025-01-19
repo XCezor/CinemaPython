@@ -13,7 +13,8 @@ def check_cinema_halls():
 			default_data = {
 				"Hall_number": hall_number,
 				"Status": "Free",
-				"Available_seats": SEATS_PER_HALL
+				"Available_seats": SEATS_PER_HALL,
+				"Reserved_showtimes": []
 			}
 			data.append(default_data)
 		with open(CINEMA_HALLS_PATH, "a") as default_file:
@@ -52,19 +53,22 @@ def check_movie_showtime(movie_showtime):
 	pattern = r"^(?:[01]\d|2[0-3]):[0-5]\d-(?:[01]\d|2[0-3]):[0-5]\d$"
 	return bool(re.match(pattern, movie_showtime))
 
+def check_available_halls(movie_hall, movie_showtime):
+	halls_data = get_halls_data()
+	return any(hall["Hall_number"] == movie_hall and movie_showtime not in hall["Reserved_showtimes"] for hall in halls_data)
+
+def add_showtime(movie_title, new_movie_showtime):
+	halls_data = get_halls_data()
+	pass
+
 class Movie:
-	def __init__(self, title, duration, showtimes):
+	def __init__(self, title, duration, showtimes, hall_number):
 		self.title = title
 		self.duration = duration
 		self.showtimes = showtimes
+		self.hall_number = hall_number
 		self.save_movie()
-
-	def add_showtime(self, time):
-		if time not in self.showtimes:
-			self.showtimes.append(time)
-			self.save_movie()
-		else:
-			print("Requested showtime is currently occupied.")
+		self.save_showtime_to_hall()
 
 	def remove_showtime(self, time):
 		if time in self.showtimes:
@@ -80,6 +84,13 @@ class Movie:
 			"Showtimes": self.showtimes
 		}
 		print(details)
+
+	def save_showtime_to_hall(self):
+		halls_data = get_halls_data()
+		for hall in halls_data:
+			if self.hall_number == hall["Hall_number"]:
+				hall["Reserved_showtimes"].append(self.showtimes)
+		save_halls_data(halls_data)
 
 	def save_movie(self):
 		file_exists = check_movies()
@@ -184,4 +195,23 @@ while program_running:
 				if valid_showtime == False:
 					print("Incorrect showtime, try again using the correct format.")
 
-			new_movie = Movie(movie_title, movie_duration, movie_showtime)
+			valid_hall = False
+			while valid_hall == False:
+				movie_hall = int(input("Enter number of the hall: "))
+				valid_hall = check_available_halls(movie_hall, movie_showtime)
+				if valid_hall == False:
+					print("Incorrect hall number or the showtime is already reserved. Try again.")
+
+			new_movie = Movie(movie_title, movie_duration, movie_showtime, movie_hall)
+
+		elif movie_option == "2" or movie_option == "two":
+			movie_title = input("Enter title of the movie: ")
+
+			new_valid_showtime = False
+			while new_valid_showtime == False:
+				new_movie_showtime = input("Enter starting showtime of a movie (e.g. 12:30-14:45): ")
+				new_valid_showtime = check_movie_showtime(new_movie_showtime)
+				if new_valid_showtime == False:
+					print("Incorrect showtime, try again using the correct format.")
+
+			add_showtime(movie_title, new_movie_showtime)
