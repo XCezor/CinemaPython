@@ -1,0 +1,2 @@
+# What is AbandonedProject?
+### So my first goal was to create a fully functional cinema but the further I was going with it, it started to fell much less OOB than the original task requires so I just put that project away and went back to the original task. Maybe in the future I'll finish it.

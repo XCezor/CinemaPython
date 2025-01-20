@@ -1,66 +1,27 @@
-# PythonKlasy
+## Cinema
 
-Zadanie:  **System rezerwacji biletów do kina**
-Celem zadania jest stworzenie systemu rezerwacji biletów do kina. Program powinien umożliwiać zarządzanie filmami, rezerwacjami oraz klientami z wykorzystaniem klas i dziedziczenia. W zadaniu należy zaimplementować co najmniej dwie klasy główne oraz klasę dziedziczącą, która rozszerza funkcjonalność jednej z głównych klas.Wymagania:
+### Classes and Functions
 
-1.  **Stwórz klasę** `**Movie**` **(Film):**
+1. `Movie(title, duration, showtimes)` - Creates a new **Movie object** with a title, duration in minutes and showtimes.
 
--   Klasa powinna przechowywać informacje o tytule filmu, czasie trwania oraz dostępnych godzinach seansów.
+- `add_showtime(time)` - Adds new showtime to the current **Movie object**
+- `remove_showtime(time)` - Removes showtime from the current **Movie object**
+- `display_details()` - Displays all movies with all details and numbers them.
 
--   Metody:
+2. `Customer(first_name, last_name)` - Creates new **Customer object** with the first and last names.
 
--   `__init__(self, title, duration, showtimes)`: Konstruktor inicjalizujący dane filmu.
--   `add_showtime(self, time)`: Dodaje nową godzinę seansu.
--   `remove_showtime(self, time)`: Usuwa istniejącą godzinę seansu.
+- `add_reservation(movie, time, private)` - Creates new reservation for the current **Customer object**. If the customer is **VIP**, the private reservation can be created instead.
+- `display_reservations()` - Displays all customers and their reservations, numbering reserved movie titles.
 
--   `display_details(self)`: Wyświetla szczegóły filmu.
+3. `VIPCustomer(Customer)` - Creates new **VIP Customer object**, which has access to VIP discount and private reservation.
 
-2.  **Stwórz klasę** `**Customer**` **(Klient):**
+- `get_discounted_price(price)` - Takes a ticket price and adds 25% discount on it, then returns new ticket price.
+- `book_private_show(movie, time)` - Allows **VIP Customer object** to book a private show using `add_reservation` from `Customer` class.
 
--   Klasa powinna przechowywać dane klienta: imię, nazwisko oraz listę zarezerwowanych biletów.
+4. `Cinema()` - A class that takes **Movie objects** and **Customer/VIP Customer objects** to store them in a lists.
 
--   Metody:
+- `add_movie(movie)` - Adds new movie that was created using `Movie` class.
+- `add_customer(customer)` - Adds new customer or VIP customer that was created using `Customer/VIP Customer` class.
+- `display_movies()` and `display_customers()` - Displays all stored movies and customers.
 
--   `__init__(self, first_name, last_name)`: Konstruktor inicjalizujący dane klienta.
--   `add_reservation(self, movie, time)`: Dodaje rezerwację na dany film i godzinę.
-
--   `display_reservations(self)`: Wyświetla listę rezerwacji klienta.
-
-3.  **Stwórz klasę dziedziczącą** `**VIPCustomer**` **(Klient VIP):**
-
--   Dziedziczy z klasy  `Customer`  i dodaje funkcjonalność:
-
--   Zniżki na bilety (np. 20%).
-
--   Prywatne seanse (rezerwacja całej sali).
-
--   Dodatkowe metody:
-
--   `get_discounted_price(self, price)`: Zwraca cenę biletu po zniżce.
-
--   `book_private_show(self, movie, time)`: Rezerwuje cały seans dla VIP-a.
-
-4.  **Stwórz główną klasę** `**Cinema**` **(Kino):**
-
--   Zarządza filmami i klientami.
-
--   Metody:
-
--   `__init__(self)`: Inicjalizuje listę dostępnych filmów i klientów.
--   `add_movie(self, movie)`: Dodaje nowy film do repertuaru.
--   `add_customer(self, customer)`: Dodaje nowego klienta.
-
--   `display_movies(self)`: Wyświetla wszystkie filmy w repertuarze.
-
-5.  **Wymagania dodatkowe:**
-
--   Użyj  **dziedziczenia**, aby klasa  `VIPCustomer`  rozszerzała funkcjonalność klasy  `Customer`.
--   W programie głównym (np. w funkcji  `main`) utwórz co najmniej dwa filmy, jednego zwykłego klienta i jednego klienta VIP.
--   Zademonstruj działanie metod (np. dodawanie rezerwacji, wyświetlanie szczegółów filmu i rezerwacji).
-
-Przykład działania:
-
-1.  Program wyświetla dostępne filmy w repertuarze kina.
-2.  Klient rezerwuje bilet na film, wybierając tytuł i godzinę seansu.
-3.  Klient VIP rezerwuje bilet z uwzględnieniem zniżki lub cały prywatny seans.
-4.  Program wyświetla szczegóły wszystkich rezerwacji klientów oraz filmy w repertuarze.
+5. Example usage of the code is inside `main.py` file under `main()` function.
