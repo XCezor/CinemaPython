@@ -89,6 +89,23 @@ class VIPCustomer(Customer):
 			raise ValueError("Incorrect number.")
 		super().add_reservation(movie, time, True)
 
+class Cinema:
+	def __init__(self):
+		self.movies = []
+		self.customers = []
+
+	def add_movie(self, movie: str):
+		self.movies.append(movie)
+
+	def add_customer(self, customer: str):
+		self.customers.append(customer)
+
+	def display_movies(self):
+		movie_number = 1
+		for movie in self.movies:
+			print(f"Movie {movie_number}: {movie}")
+			movie_number += 1
+
 new_movie = Movie("Titanic", "150", ["12:30-12:50", "14:00-15:50"])
 new_movie.display_details()
 
@@ -107,3 +124,7 @@ vip_customer = VIPCustomer("Tom", "Holland")
 vip_customer.book_private_show("Jones", 12)
 vip_customer.get_discounted_price(20)
 vip_customer.display_reservations()
+
+cinema = Cinema()
+cinema.add_movie("Titanic")
+cinema.display_movies()
