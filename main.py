@@ -106,25 +106,29 @@ class Cinema:
 			print(f"Movie {movie_number}: {movie}")
 			movie_number += 1
 
-new_movie = Movie("Titanic", "150", ["12:30-12:50", "14:00-15:50"])
-new_movie.display_details()
+def main():
+	new_movie = Movie("Titanic", "150", ["12:30-12:50", "14:00-15:50"])
+	new_movie.display_details()
 
-new_movie.add_showtime("19:29-22:33")
-new_movie.display_details()
+	new_movie.add_showtime("19:29-22:33")
+	new_movie.display_details()
 
-new_movie.remove_showtime("12:30-12:50")
-new_movie.display_details()
+	new_movie.remove_showtime("12:30-12:50")
+	new_movie.display_details()
 
-new_customer = Customer("Tom", "Cruise")
-new_customer.add_reservation("Titanic", 20, False)
-new_customer.add_reservation("Them", 15, False)
-new_customer.display_reservations()
+	new_customer = Customer("Tom", "Cruise")
+	new_customer.add_reservation("Titanic", 20, False)
+	new_customer.add_reservation("Them", 15, False)
+	new_customer.display_reservations()
 
-vip_customer = VIPCustomer("Tom", "Holland")
-vip_customer.book_private_show("Jones", 12)
-vip_customer.get_discounted_price(20)
-vip_customer.display_reservations()
+	vip_customer = VIPCustomer("Tom", "Holland")
+	vip_customer.book_private_show("Jones", 12)
+	vip_customer.get_discounted_price(20)
+	vip_customer.display_reservations()
 
-cinema = Cinema()
-cinema.add_movie("Titanic")
-cinema.display_movies()
+	cinema = Cinema()
+	cinema.add_movie("Titanic")
+	cinema.display_movies()
+
+if __name__ == "__main__":
+    main()
