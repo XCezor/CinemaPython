@@ -103,7 +103,7 @@ class VIPCustomer(Customer):
 
 class Cinema:
 	def __init__(self):
-		'''Creates empty lists for moveis and customers.'''
+		'''Creates empty lists for movies and customers.'''
 		self.movies = []
 		self.customers = []
 
@@ -115,17 +115,13 @@ class Cinema:
 
 	def display_movies(self):
 		'''Shows all movies in the cinema, numbered.'''
-		movie_number = 1
 		for movie in self.movies:
-			print(f"Movie {movie_number}: {movie}")
-			movie_number += 1
+			movie.display_details()
 
 	def display_customers(self):
 		'''Shows all customers in the cinema, numbered.'''
-		customer_number = 1
 		for customer in self.customers:
-			print(f"Customer {customer_number}: {customer}")
-			customer_number += 1
+			customer.display_reservations()
 
 def main():
     # Creation of a new movie with 2 showtimes
@@ -140,6 +136,8 @@ def main():
 	new_movie.remove_showtime("12:30-12:50")
 	new_movie.display_details()
 
+	new_movie_2 = Movie("Them", "120", ["10:30-12:30", "16:00-18:50"])
+
 	# Creating a new customer with 2 reservations
 	new_customer = Customer("Tom", "Cruise")
 	new_customer.add_reservation("Titanic", 20, False)
@@ -152,10 +150,14 @@ def main():
 	vip_customer.get_discounted_price(20)
 	vip_customer.display_reservations()
 
-	# Creating a new cinema and adding a movie to it, then displaying all movies
+	# Creating a cinema and adding movies and customers to it, then displaying them
 	cinema = Cinema()
-	cinema.add_movie("Titanic")
+	cinema.add_movie(new_movie)
+	cinema.add_movie(new_movie_2)
 	cinema.display_movies()
+	cinema.add_customer(new_customer)
+	cinema.add_customer(vip_customer)
+	cinema.display_customers()
 
 if __name__ == "__main__":
     main()
