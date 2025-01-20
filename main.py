@@ -50,13 +50,14 @@ class Customer:
 	def __init__(self, first_name: str, last_name: str):
 		self.first_name = first_name
 		self.last_name = last_name
-		self.reservations = {"Movies": [], "Showtimes": []}
+		self.reservations = {"Movies": [], "Showtimes": [], "Private": []}
 
-	def add_reservation(self, movie: str, time: int):
+	def add_reservation(self, movie: str, time: int, private: bool):
 		if not self.validate_time(time):
 			raise ValueError("Incorrect number.")
 		self.reservations["Movies"].append(movie)
 		self.reservations["Showtimes"].append(time)
+		self.reservations["Private"].append(private)
 
 	@staticmethod
 	def validate_time(time):
@@ -68,9 +69,25 @@ class Customer:
 	def display_reservations(self):
 		print(f"First name: {self.first_name}\nLast name: {self.last_name}")
 		movie_number = 1
-		for movie, showtime in zip(self.reservations["Movies"], self.reservations["Showtimes"]):
-			print(f"Movie {movie_number}: {movie}, showtime: {showtime}")
+		for movie, showtime, private in zip(self.reservations["Movies"], self.reservations["Showtimes"], self.reservations["Private"]):
+			print(f"Movie {movie_number}: {movie}, showtime: {showtime}, private: {private}")
 			movie_number += 1
+		print("")
+
+class VIPCustomer(Customer):
+	def __init__(self, first_name: str, last_name: str):
+		super().__init__(first_name, last_name)
+
+	def get_discounted_price(self, price: int) -> float:
+		vip_discount = price * 0.75
+		print(f"Greetings sir, your ticket price, including Your VIP discount, is {vip_discount}$")
+		return vip_discount
+
+	def book_private_show(self, movie: str, time: int):
+		self.movie = movie
+		if not super().validate_time(time):
+			raise ValueError("Incorrect number.")
+		super().add_reservation(movie, time, True)
 
 new_movie = Movie("Titanic", "150", ["12:30-12:50", "14:00-15:50"])
 new_movie.display_details()
@@ -82,6 +99,11 @@ new_movie.remove_showtime("12:30-12:50")
 new_movie.display_details()
 
 new_customer = Customer("Tom", "Cruise")
-new_customer.add_reservation("Titanic", 20)
-new_customer.add_reservation("Them", 15)
+new_customer.add_reservation("Titanic", 20, False)
+new_customer.add_reservation("Them", 15, False)
 new_customer.display_reservations()
+
+vip_customer = VIPCustomer("Tom", "Holland")
+vip_customer.book_private_show("Jones", 12)
+vip_customer.get_discounted_price(20)
+vip_customer.display_reservations()

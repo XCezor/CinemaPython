@@ -1,0 +1,5 @@
+{
+	"gitlab.duoChat.enabled": true,
+	"gitlab.duoCodeSuggestions.enabled": true,
+	"gitlab.duo.enabledWithoutGitlabProject": true
+}
