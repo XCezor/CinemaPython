@@ -47,12 +47,30 @@ class Movie:
 		print(f"Title: {self.title}\nDuration: {self.duration} minutes\nShowtimes: {self.showtimes}\n")
 
 class Customer:
-	def __init__(self, first_name, last_name):
+	def __init__(self, first_name: str, last_name: str):
 		self.first_name = first_name
 		self.last_name = last_name
+		self.reservations = {"Movies": [], "Showtimes": []}
 
-	def add_reservation(self, movie, time):
-		self.movie = movie
+	def add_reservation(self, movie: str, time: int):
+		if not self.validate_time(time):
+			raise ValueError("Incorrect number.")
+		self.reservations["Movies"].append(movie)
+		self.reservations["Showtimes"].append(time)
+
+	@staticmethod
+	def validate_time(time):
+		if time in range(00, 23):
+			return True
+		else:
+			return False
+
+	def display_reservations(self):
+		print(f"First name: {self.first_name}\nLast name: {self.last_name}")
+		movie_number = 1
+		for movie, showtime in zip(self.reservations["Movies"], self.reservations["Showtimes"]):
+			print(f"Movie {movie_number}: {movie}, showtime: {showtime}")
+			movie_number += 1
 
 new_movie = Movie("Titanic", "150", ["12:30-12:50", "14:00-15:50"])
 new_movie.display_details()
@@ -62,3 +80,8 @@ new_movie.display_details()
 
 new_movie.remove_showtime("12:30-12:50")
 new_movie.display_details()
+
+new_customer = Customer("Tom", "Cruise")
+new_customer.add_reservation("Titanic", 20)
+new_customer.add_reservation("Them", 15)
+new_customer.display_reservations()
